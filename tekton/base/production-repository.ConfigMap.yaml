@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: production-repository
+data:
+  branch: main
+  host: github.com
+  protocol: https
+  repo: nextjsapp-prod
+  org: remiserra

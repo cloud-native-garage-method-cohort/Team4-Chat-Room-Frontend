@@ -1,0 +1,14 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - create-configuration.Task.yaml
+  - deploy.Task.yaml
+  - cicd-pipeline.yaml
+  - git-credentials.secret.yaml
+  - http://raw.githubusercontent.com/tektoncd/catalog/main/task/npm/0.1/npm.yaml
+  - production-repository.ConfigMap.yaml
+  - quayio-credentials.secret.yaml
+  - save-configuration.Task.yaml
+  - buildbot-serviceaccount.yaml
+  - vcs-trigger.yaml

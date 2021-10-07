@@ -1,0 +1,32 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: cicd-front-
+spec:
+  serviceAccountName: build-bot
+  params:
+    - name: app-name
+      value: squad4-chat-front
+    - name: source-repo
+      value: https://github.com/cloud-native-garage-method-cohort/Team4-Chat-Room-Frontend/chatroom
+    - name: image-repo
+      value: quay.io/remiserra/squad4-chat-front
+  pipelineRef:
+    name: build-chat-front
+  workspaces:
+    - name: pipeline-shared-data
+      volumeClaimTemplate:
+        spec:
+          resources:
+            requests:
+              storage: 1Gi
+          accessModes:
+            - ReadWriteOnce
+    - name: production-repository
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
