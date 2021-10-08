@@ -46,7 +46,7 @@ export class ChatRoom extends React.Component {
 
         return (
             <div className="chatroom-wrapper">
-                <h2>Logged as: {this.props.username}</h2>
+                <h2>Hi {this.props.username}</h2>
                 
                 <div className="input-wrapper">
                     <pre className="messages">
