@@ -22,6 +22,11 @@ export class Login extends React.Component {
         server.onmessage = ({data}) => {
             let connectMsg = proto.parseMessage(data);
 
+            // Listen only for connection acks
+            if(connectMsg.type != proto.MessageType.CONNECTION_REPLY) {
+                return;
+            }
+
             switch(connectMsg.status) {
             case proto.Status.CONNECT_OK:
                 this.props.onLogin(this.username);

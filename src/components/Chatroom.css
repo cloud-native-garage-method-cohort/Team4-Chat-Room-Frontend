@@ -16,5 +16,21 @@
 
 .input-wrapper {
     width: 50%;
-    align-items: right !important;
+}
+
+.main-table {
+    width: 100%;
+}
+
+.messages-pane {
+    width: 70%;
+}
+
+.client-list-pane {
+    width: 30%;
+}
+
+.user-list {
+    height: 400px;
+    overflow: scroll;
 }

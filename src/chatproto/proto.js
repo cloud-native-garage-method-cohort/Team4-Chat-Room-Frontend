@@ -2,6 +2,7 @@ export const MessageType = {
     CONNECTION_REQUEST : "REQ",
     CONNECTION_REPLY   : "RPL",
     MESSAGE_DATA       : "MSG",
+    CLIENT_LIST       : "LST",
 };
 
 // TODO: review serialization, maybe can be done automatically
@@ -84,6 +85,23 @@ export class ChatMessage extends ProtoMessage {
     }
 }
 
+export class ClientListMessage extends ProtoMessage {
+    constructor(clients) {
+        super(MessageType.CLIENT_LIST);
+        this._clients = clients;
+    }
+
+    get clients() {
+        return this._clients;
+    }
+
+    serialize() {
+        let res = super.serialize();
+        res.clients = this._clients;
+        return JSON.stringify(res);
+    }
+}
+
 export function parseMessage(message) {
     var messageJson = JSON.parse(message);
 
@@ -95,6 +113,8 @@ export function parseMessage(message) {
         return new ReplyMessage(messageJson.status);
     case MessageType.MESSAGE_DATA:
         return new ChatMessage(messageJson.name, messageJson.message);
+    case MessageType.CLIENT_LIST:
+        return new ClientListMessage(messageJson.clients);
     }
 
     throw TypeError("Unknown message type");
