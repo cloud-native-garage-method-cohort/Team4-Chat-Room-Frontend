@@ -7,8 +7,9 @@ COPY package.json ./
 
 # install dependencies
 RUN npm install
-
-COPY --chown=node:node . .
+COPY . .
+RUN whoami
+RUN chown -R node:node /app/node_modules
 
 # build
 RUN npm run build
