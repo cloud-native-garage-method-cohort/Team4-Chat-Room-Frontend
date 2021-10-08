@@ -37,9 +37,11 @@ export class ConnectMessage extends ProtoMessage {
 }
 
 export const Status = {
-    OK          : "Succesfully connected",
-    ERR         : "Error comunicating with the chatroom",
-    NAME_FOUND  : "Username already taken",
+    CONNECT_OK     : "Succesfully connected",
+    CONNECT_ERR    : "Error connection to the chatroom",
+    GENERIC_ERR    : "Error comunicating with the chatroom",
+    AUTH_NEEDED    : "Authorization needed",
+    NAME_TAKEN_ERR : "Username already taken",
 };
 
 export class ReplyMessage extends ProtoMessage {

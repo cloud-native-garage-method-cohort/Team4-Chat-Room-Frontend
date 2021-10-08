@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router';
 import './Chatroom.css'
 
-import * as proto from '../chatroom/proto'
+import * as proto from '../chatproto/proto'
 
 export class ChatRoom extends React.Component {
     constructor(props) {

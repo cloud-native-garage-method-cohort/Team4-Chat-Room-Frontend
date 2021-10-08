@@ -1,7 +1,7 @@
 import React from 'react';
 import './Login.css'
 
-import * as proto from '../chatroom/proto'
+import * as proto from '../chatproto/proto'
 import { Redirect } from 'react-router';
 
 export class Login extends React.Component {
@@ -23,26 +23,17 @@ export class Login extends React.Component {
             let connectMsg = proto.parseMessage(data);
 
             switch(connectMsg.status) {
-            case proto.Status.OK:
+            case proto.Status.CONNECT_OK:
                 this.props.onLogin(this.username);
                 this.setState({
                     logged : true,
                 });
                 break;
-            case proto.Status.ERR:
-                this.setState({
-                    error : "Couldn't connect to the chat room"
-                });
-                break;
-            case proto.Status.NAME_FOUND:
-                this.setState({
-                    error : "Name already taken, choose another one"
-                });
-                break;
             default:
                 this.setState({
-                    error : "Unknown error"
+                    error : connectMsg.status
                 });
+                break;
             }
         }
     }
