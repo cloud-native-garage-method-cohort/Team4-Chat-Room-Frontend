@@ -1,21 +1,18 @@
-# Specify a base image
-FROM node:alpine
-
+# Install dependencies and build the app
+FROM quay.io/upslopeio/node-alpine as build
 WORKDIR /app
 
-COPY package.json ./
+COPY package*.json ./
+RUN npm ci
 
-# install dependencies
-RUN npm install
 COPY . .
-RUN whoami
-RUN chown -R node:node /app/node_modules
-
-# build
 RUN npm run build
 
-# Uses port which is used by the actual application
-EXPOSE 3000
+# Serve the static site using nginx
+FROM quay.io/upslopeio/nginx-unprivileged
 
-# Default command
-CMD ["npm", "start"]
+COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
+
+# Document the port
+EXPOSE 3000
