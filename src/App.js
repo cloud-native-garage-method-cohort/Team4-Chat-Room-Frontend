@@ -16,7 +16,7 @@ export default class App extends React.Component {
         }
     }
 
-    loggedinAs(username) {
+    onLogin(username) {
         this.setState({
             loggedUsername: username
         });
@@ -32,7 +32,7 @@ export default class App extends React.Component {
                             <ChatRoom server={this.server} username={this.state.loggedUsername} />
                         </Route>
                         <Route path="/">
-                            <Login server={this.server} loggedinAs={(username) => this.loggedinAs(username)}/>
+                            <Login server={this.server} onLogin={(username) => this.onLogin(username)}/>
                         </Route>
                     </Switch>
                 </BrowserRouter>

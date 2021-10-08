@@ -24,7 +24,7 @@ export class Login extends React.Component {
 
             switch(connectMsg.status) {
             case proto.Status.OK:
-                this.props.loggedinAs(this.username);
+                this.props.onLogin(this.username);
                 this.setState({
                     logged : true,
                 });
