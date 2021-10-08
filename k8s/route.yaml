@@ -1,0 +1,13 @@
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: chatroom-frontend
+spec:
+  tls:
+    termination: edge
+  to:
+    name: chatroom-frontend
+    kind: Service
+    weight: 100
+  wildcardPolicy: None
