@@ -3,22 +3,18 @@ FROM node:alpine
 
 WORKDIR /app
 
-COPY package.json yarn.lock ./
+COPY package.json ./
 
 # install dependencies
-RUN yarn install
+RUN npm install
 
-COPY . .
+COPY --chown=node:node . .
 
 # build
-RUN yarn build
-
-RUN rm -rf /app/node_modules/.cache/.eslintcache
+RUN npm run build
 
 # Uses port which is used by the actual application
 EXPOSE 3000
 
-USER node
-
 # Default command
-CMD ["yarn", "run", "start"]
+CMD ["npm", "start"]
